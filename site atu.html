@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadott Barber Club | Joinville</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        :root {
+            --gold: #c5a059;
+            --black: #121212;
+            --gray: #1e1e1e;
+            --white: #ffffff;
+            --silver: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--black); 
+            color: var(--white); 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed; top: 0; width: 100%; padding: 15px 10%;
+            background: rgba(18, 18, 18, 0.9); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        .nav-links { display: flex; gap: 20px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--white); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* BOTÕES FLUTUANTES */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background-color: #25d366;
+            color: white; width: 60px; height: 60px; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center; font-size: 30px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.4); z-index: 999; animation: pulseZap 2s infinite;
+        }
+
+        .appbarber-float {
+            position: fixed; bottom: 105px; right: 30px; background-color: #ffffff;
+            color: #000; width: 60px; height: 60px; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center; font-size: 24px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.4); z-index: 999; 
+            transition: 0.3s; border: 2px solid var(--gold); overflow: hidden;
+        }
+        .appbarber-float img { width: 100%; height: 100%; object-fit: cover; }
+
+        @keyframes pulseZap { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+        /* HERO */
+        .hero { 
+            height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(https://i.postimg.cc/nh7pGT0H/GADOTTTTI.jpg); 
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+
+        .logo-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
+        .logo-box { border: 2px solid var(--gold); border-radius: 15px; padding: 5px 20px; font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--silver); line-height: 1; margin-bottom: 5px; }
+        .logo-main-text { font-family: 'Oswald', sans-serif; font-size: 5rem; color: var(--silver); letter-spacing: 8px; line-height: 0.9; text-transform: uppercase; }
+        .logo-footer-text { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; letter-spacing: 15px; color: var(--gold); font-weight: bold; margin-top: 5px; text-transform: uppercase; }
+
+        .btn-main { background: var(--gold); color: black; padding: 18px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; text-transform: uppercase; transition: 0.4s; }
+        .btn-main:hover { background: #ffffff; transform: translateY(-5px); }
+
+        /* SEÇÕES GERAIS */
+        section { padding: 100px 10%; text-align: center; }
+        section h2 { font-size: 2.5rem; color: var(--gold); margin-bottom: 50px; text-transform: uppercase; font-family: 'Oswald'; }
+
+        /* TABELA DE PREÇOS (INFORMATIVO) */
+        .price-table-container { background: var(--gray); padding: 40px; border-radius: 15px; border: 1px solid var(--gold); max-width: 800px; margin: 0 auto; }
+        .price-group { margin-bottom: 40px; text-align: left; }
+        .price-group h3 { color: var(--gold); border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 20px; font-family: 'Oswald'; text-transform: uppercase; }
+        .price-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.1rem; border-bottom: 1px dotted #444; padding-bottom: 5px; }
+        .price-item span:last-child { color: var(--gold); font-weight: bold; }
+        .obs { font-size: 0.8rem; color: #888; font-style: italic; margin-top: 10px; }
+
+        /* SERVIÇOS CARDS */
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .service-card { background: var(--gray); padding: 40px; border-radius: 10px; border: 1px solid #333; transition: 0.4s; }
+        .service-card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .service-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
+        .service-card .price { font-size: 1.5rem; color: var(--gold); font-weight: bold; display: block; margin-top: 15px; }
+
+        /* LOCALIZAÇÃO */
+        .location-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; text-align: left; }
+        .map-info i { color: var(--gold); margin-right: 10px; }
+        .map-container iframe { width: 100%; border-radius: 15px; border: 2px solid var(--gold); }
+
+        /* REVIEWS */
+        .reviews { background: #0a0a0a; overflow: hidden; }
+        .review-card { background: var(--gray); padding: 40px; border-radius: 15px; border-top: 4px solid var(--gold); text-align: left; }
+        .review-card .stars { color: var(--gold); margin-bottom: 10px; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* AGENDAMENTO */
+        form { max-width: 550px; margin: 0 auto; background: var(--gray); padding: 40px; border-radius: 10px; }
+        input, select { width: 100%; padding: 14px; background: #2a2a2a; border: 1px solid #444; color: white; border-radius: 5px; margin-bottom: 20px; }
+        .btn-submit { width: 100%; background: #25d366; color: white; padding: 16px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; }
+
+        footer { padding: 50px; background: black; text-align: center; color: #777; border-top: 1px solid #333; }
+
+        @media (max-width: 768px) { 
+            .nav-links { display: none; } 
+            .logo-main-text { font-size: 3rem; }
+            .location-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div style="font-family: 'Oswald', sans-serif; color: var(--gold); font-size: 1.2rem; border: 1px solid var(--gold); padding: 2px 8px; border-radius: 4px;">GB</div>
+        <ul class="nav-links">
+            <li><a href="#">Início</a></li>
+            <li><a href="#precos">Preços</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#localizacao">Localização</a></li>
+            <li><a href="#agendamento">Agendamento</a></li>
+        </ul>
+    </nav>
+
+    <a href="https://sites.appbarber.com.br/studiogadotti-owfg" class="appbarber-float" target="_blank">
+        <img src="https://i.postimg.cc/RFLFTRS6/appbarber2.jpg" alt="AppBarber">
+    </a>
+    <a href="https://wa.me/554796121369" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="logo-wrapper animate__animated animate__fadeInDown">
+                <div class="logo-box">GB</div>
+                <h1 class="logo-main-text">GADOTT</h1>
+                <div class="logo-footer-text">BARBER CLUB</div>
+            </div>
+            <p class="animate__animated animate__fadeInUp" style="letter-spacing: 3px; margin-bottom: 30px;">O CLUBE DA BARBA EM JOINVILLE</p>
+            <a href="#agendamento" class="btn-main animate__animated animate__pulse animate__infinite">Agendar agora</a>
+        </div>
+    </header>
+
+    <section id="precos" class="reveal">
+        <h2>Informativo de Valores</h2>
+        <div class="price-table-container">
+            <div class="price-group">
+                <h3>A partir de 17.12.2024</h3>
+                <div class="price-item"><span>Corte de Cabelo</span> <span>R$ 50</span></div>
+                <div class="price-item"><span>Corte de Barba</span> <span>R$ 35</span></div>
+                <div class="price-item"><span>Sobrancelhas</span> <span>R$ 35</span></div>
+                <div class="price-item"><span>Limpeza de Pele</span> <span>R$ 150</span></div>
+            </div>
+
+            <div class="price-group">
+                <h3>Pacotes de Corte (A partir de 09.01.2025)</h3>
+                <div class="price-item"><span>2 Cortes no Mês</span> <span>R$ 90</span></div>
+                <div class="price-item"><span>4 Cortes no Mês</span> <span>R$ 180</span></div>
+                <div class="price-item"><span>2 Cortes + 2 Barbas no Mês</span> <span>R$ 150</span></div>
+                <p class="obs">*OBS: Valores pagos antecipadamente</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="services reveal">
+        <h2>Destaques</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <i class="fas fa-cut"></i>
+                <h3>Corte Simples</h3>
+                <p>Estilo clássico ou moderno com acabamento impecável.</p>
+                <span class="price">R$ 50,00</span>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-razor"></i>
+                <h3>Barba</h3>
+                <p>Ritual clássico com toalha quente e óleos especiais.</p>
+                <span class="price">R$ 35,00</span>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Combo Club</h3>
+                <p>O melhor custo-benefício para membros do clube.</p>
+                <span class="price">R$ 150,00</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="localizacao" class="reveal" style="background: #0a0a0a;">
+        <h2>Onde Estamos</h2>
+        <div class="location-content">
+            <div class="map-info">
+                <h3>Gadott Barber Club</h3>
+                <p style="margin: 20px 0;"><i class="fas fa-map-marker-alt"></i> Av. Alm. Jaceguay, 2899<br>Costa e Silva - Joinville/SC</p>
+                <p style="margin-bottom: 20px;"><i class="fas fa-clock"></i> Seg - Sáb: 09:00 - 20:00</p>
+                <a href="https://www.google.com/maps/dir//Av.+Alm.+Jaceguay,+2899+-+Costa+e+Silva,+Joinville+-+SC,+89220-055" target="_blank" class="btn-main" style="display:inline-block; padding: 12px 25px; font-size: 0.8rem;">Como Chegar</a>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.454226162157!2d-48.8778888!3d-26.2751578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94deb05177267039%3A0x6a0c0b8b0e8b8b8b!2sAv.%20Alm.%20Jaceguay%2C%202899%20-%20Costa%20e%20Silva%2C%20Joinville%20-%20SC%2C%2089220-055!5e0!3m2!1spt-BR!2sbr!4v1715000000000!5m2!1spt-BR!2sbr" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback" class="reviews reveal">
+        <h2>Feedback dos Membros</h2>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Ambiente nota mil e profissionais de elite."</p><span>- Claudinor Camargo</span></div></div>
+                <div class="swiper-slide"><div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"A melhor experiência de Joinville."</p><span>- Douglas Silva</span></div></div>
+                <div class="swiper-slide"><div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Corte perfeito e cerveja gelada."</p><span>- Vitor Mult</span></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <section id="agendamento" class="booking reveal">
+        <h2>RESERVE SEU HORÁRIO</h2>
+        <form id="formAgendamento">
+            <input type="text" id="nome" placeholder="Seu nome" required>
+            <select id="servico">
+                <option value="Corte">Corte Simples</option>
+                <option value="Barba">Barba</option>
+                <option value="Combo">Combo Club</option>
+            </select>
+            <input type="datetime-local" id="dataHora" required>
+            <button type="submit" class="btn-submit">Confirmar via WhatsApp</button>
+        </form>
+    </section>
+
+    <footer><p>© 2026 Gadott Barber Club - Av. Alm. Jaceguay, 2899 - Joinville/SC</p></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1, spaceBetween: 30, loop: true,
+            pagination: { el: ".swiper-pagination", clickable: true },
+            breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
+            autoplay: { delay: 3000 }
+        });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 150) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        document.getElementById('formAgendamento').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fone = "554796121369";
+            const msg = `*GADOTT BARBER CLUB*%0A*Novo Agendamento*%0A*Cliente:* ${document.getElementById('nome').value}%0A*Serviço:* ${document.getElementById('servico').value}`;
+            window.open(`https://wa.me/${fone}?text=${msg}`, '_blank');
+        });
+    </script>
+</body>
+</html>
